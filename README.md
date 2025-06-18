@@ -1,19 +1,26 @@
-This PowerShell script attempts to download the entire Invoke-GetHardwareHashWithoutAdmin GitHub repository, extract it, and then run the script from the PowerShell subfolder. This ensures that if oa3tool.exe and OA3.cfg are included in the repository's PowerShell folder, they will be available to the script.
-Instructions:
-Open PowerShell (does not need to be as Administrator) on the target Windows device.
-Copy the script below.
-Paste the script into the PowerShell window and press Enter.
-The script will:
-Download the Crankers/Invoke-GetHardwareHashWithoutAdmin repository as a ZIP file to your temporary directory.
-Extract the ZIP file.
-Navigate into the extracted PowerShell subfolder.
-Attempt to execute Invoke-GetHardwareHashWithoutAdmin.ps1.
-The hardware hash will be saved to a hash.txt file in your Downloads folder.
-Troubleshooting:
-If the script fails (e.g., because oa3tool.exe is still not found within the repository's PowerShell folder, or due to network/permission issues), you may need to manually ensure oa3tool.exe (typically part of the Windows Assessment and Deployment Kit - ADK) is available where the script expects it.
-PowerShell execution policies might also prevent script execution. You may need to adjust them (e.g., Set-ExecutionPolicy RemoteSigned -Scope Process -Force) or unblock the downloaded .ps1 file manually if it's still present in the temp folder after a failed run.
-Ensure your PowerShell version is 5.0 or higher for Expand-Archive to work correctly.
-PowerShell Script (Download & Run Full Repo):
+# Collect Hardware Hash (No Admin - Download & Run Full Repo)
+
+This PowerShell script attempts to download the entire `Invoke-GetHardwareHashWithoutAdmin` GitHub repository, extract it, and then run the script from the `PowerShell` subfolder. This ensures that if `oa3tool.exe` and `OA3.cfg` are included in the repository's `PowerShell` folder, they will be available to the script.
+
+## Instructions:
+
+1.  Open PowerShell (does not need to be as Administrator) on the target Windows device.
+2.  Copy the script below.
+3.  Paste the script into the PowerShell window and press Enter.
+4.  The script will:
+    *   Download the [Crankers/Invoke-GetHardwareHashWithoutAdmin](https://github.com/Crankers/Invoke-GetHardwareHashWithoutAdmin) repository as a ZIP file to your temporary directory.
+    *   Extract the ZIP file.
+    *   Navigate into the extracted `PowerShell` subfolder.
+    *   Attempt to execute `Invoke-GetHardwareHashWithoutAdmin.ps1`.
+5.  The hardware hash will be saved to a `hash.txt` file in your Downloads folder.
+6.  **Troubleshooting:**
+    *   If the script fails (e.g., because `oa3tool.exe` is still not found within the repository's `PowerShell` folder, or due to network/permission issues), you may need to manually ensure `oa3tool.exe` (typically part of the Windows Assessment and Deployment Kit - ADK) is available where the script expects it.
+    *   PowerShell execution policies might also prevent script execution. You may need to adjust them (e.g., `Set-ExecutionPolicy RemoteSigned -Scope Process -Force`) or unblock the downloaded `.ps1` file manually if it's still present in the temp folder after a failed run.
+    *   Ensure your PowerShell version is 5.0 or higher for `Expand-Archive` to work correctly.
+
+## PowerShell Script:
+
+```powershell
 # Script to download the Crankers/Invoke-GetHardwareHashWithoutAdmin repository, unzip it, and run the script.
 
 $repoOwner = "Crankers"
@@ -26,7 +33,7 @@ $scriptSubPath = "PowerShell" # The subfolder within the repo containing the scr
 $tempPath = $env:TEMP
 $localZipPath = Join-Path -Path $tempPath -ChildPath $zipFileName
 $extractionBase = Join-Path -Path $tempPath -ChildPath "" # Expand-Archive extracts to a folder named by zip inside this path
-$extractedRepoPath = Join-Path -Path $extractionBase -ChildPath $extractedFolderName 
+$extractedRepoPath = Join-Path -Path $extractionBase -ChildPath $extractedFolderName
 $scriptExecutionDir = Join-Path -Path $extractedRepoPath -ChildPath $scriptSubPath
 $scriptToRun = Join-Path -Path $scriptExecutionDir -ChildPath "Invoke-GetHardwareHashWithoutAdmin.ps1"
 
@@ -89,5 +96,4 @@ try {
 Write-Host "Attempting to execute $($scriptToRun) (it may take a moment)..."
 Write-Host "This script relies on oa3tool.exe and OA3.cfg being in the same directory ($scriptExecutionDir)."
 & .\Invoke-GetHardwareHashWithoutAdmin.ps1
-
-
+```
