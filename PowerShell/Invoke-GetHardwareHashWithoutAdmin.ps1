@@ -34,4 +34,6 @@ del $PSScriptRoot\OA3.xml
 }
 
 #################################################################################
-$hash
+Remove-Item -Path "C:\Users\Administrator\Downloads\Hash.txt" -Force -ErrorAction SilentlyContinue
+$hash > C:\Users\Administrator\Downloads\Hash.txt
+Write-Host "Please check your downloads folder for hash.txt"
