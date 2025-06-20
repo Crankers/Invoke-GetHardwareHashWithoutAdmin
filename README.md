@@ -22,6 +22,7 @@ This PowerShell script attempts to download the entire `Invoke-GetHardwareHashWi
 
 ```powershell
 # Script to download the Crankers/Invoke-GetHardwareHashWithoutAdmin repository, unzip it, and run the script.
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
 
 $repoOwner = "Crankers"
 $repoName = "Invoke-GetHardwareHashWithoutAdmin"
@@ -96,4 +97,5 @@ try {
 Write-Host "Attempting to execute $($scriptToRun) (it may take a moment)..."
 Write-Host "This script relies on oa3tool.exe and OA3.cfg being in the same directory ($scriptExecutionDir)."
 & .\Invoke-GetHardwareHashWithoutAdmin.ps1
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
