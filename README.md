@@ -99,3 +99,10 @@ Write-Host "This script relies on oa3tool.exe and OA3.cfg being in the same dire
 & .\Invoke-GetHardwareHashWithoutAdmin.ps1
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm:$false -Force
 ```
+## Legal Disclaimer
+
+The provided PowerShell script is shared with the community as-is. The author and any co-author(s) make no warranties or guarantees regarding its functionality, reliability, or suitability for any specific purpose.
+
+This script may require modifications to fit your specific environment or requirements. It is strongly recommended to test the script in a non-production environment before using it in a live or critical system.
+
+The author and co-author(s) shall not be held responsible for any damages, losses, or unintended effects resulting from the use of this script. By using this script, you assume all associated risks and responsibilities.
